@@ -7,12 +7,18 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: command: make deps
-      - run: command: make test
-      - run: command: make docker_push
+      - run:
+          name: Install dependencies
+          command: make deps
+      - run:
+          name: Run tests
+          command: make test
+      - run:
+          name: Push Docker image
+          command: make docker_push
 
 workflows:
-  version:
+  version: 2
   basic:
     jobs:
       - build-and-test
